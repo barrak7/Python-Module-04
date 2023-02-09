@@ -41,17 +41,20 @@ class MyPlotLib:
 
     @staticmethod
     def pair_plot(df, features):
-        new_df = MyPlotLib.fix_features(df, features)
-        pd.plotting.scatter_matrix(new_df)
-        plt.show()
+        try:
+            new_df = MyPlotLib.fix_features(df, features)
+            pd.plotting.scatter_matrix(new_df)
+            plt.show()
+        except:
+            return
 
     @staticmethod
     def box_plot(df, features):
-        new_df = MyPlotLib.fix_features(df, features)
+        try:
+            new_df = MyPlotLib.fix_features(df, features)
+            new_df.boxplot()
+            plt.show()
+        except:
+            return
 
 
-loader = FileLoader()
-data = loader.load("../athlete_events.csv")
-data = data[data['NOC'] == 'USA']
-data = data[['Age', 'Height', 'Weight']]
-MyPlotLib.pair_plot(data, list(data))
